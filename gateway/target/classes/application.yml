@@ -1,6 +1,10 @@
 spring:
   application:
+<<<<<<< HEAD
     name: tiny-url-gateway
+=======
+    name: srd-gateway
+>>>>>>> d46c3e4f23b5d4e99a1f33ed5f995ce06241393d
   cloud:
     consul:
       host: localhost
@@ -13,10 +17,17 @@ spring:
         locator:
           enabled: true
       routes:
+<<<<<<< HEAD
         - id: tiny-url
           uri: lb://tiny-url-backend
           predicates:
             - Path=/short-url/**, /url/**
+=======
+        - id: srd
+          uri: lb://srd-greeter
+          predicates:
+            - Path=/greet/**
+>>>>>>> d46c3e4f23b5d4e99a1f33ed5f995ce06241393d
           metadata:
             response-timeout: 500
           filters:
