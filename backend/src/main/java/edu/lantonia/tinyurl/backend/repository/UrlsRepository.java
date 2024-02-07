@@ -28,16 +28,16 @@ public class UrlsRepository {
         selectUrl = session.prepare("SELECT url FROM urls WHERE id = ? LIMIT 1;");
     }
 
-    public void insertUrl(Long id, String url) {
+    public void insertUrl(String id, String url) {
         insertUrl(id, url, TTL);
     }
 
-    public void insertUrl(Long id, String url, Integer ttl) {
-        session.execute(insertUrl.bind(id.toString(), url, ttl));
+    public void insertUrl(String id, String url, Integer ttl) {
+        session.execute(insertUrl.bind(id, url, ttl));
     }
 
-    public String selectUrl(Long id) {
-        final Row row = session.execute(selectUrl.bind(id.toString()).setConsistencyLevel(ConsistencyLevel.QUORUM)).one();
+    public String selectUrl(String id) {
+        final Row row = session.execute(selectUrl.bind(id).setConsistencyLevel(ConsistencyLevel.QUORUM)).one();
         if (row == null) {
             return null;
         }

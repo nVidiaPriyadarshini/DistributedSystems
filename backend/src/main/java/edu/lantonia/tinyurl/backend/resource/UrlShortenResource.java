@@ -22,13 +22,13 @@ public class UrlShortenResource {
 
     @PostMapping("/short-url")
     public String shortenUrl(@RequestBody String longUrl) throws Exception {
-        Long id = idGenerator.nextId();
+        String id = Long.toString(idGenerator.nextId(), 36);
         urlsRepository.insertUrl(id, longUrl);
-        return String.format("http://localhost:8080/url/%d", id);
+        return String.format("http://localhost:8080/url/%s", id);
     }
 
     @GetMapping("/url/{id}")
-    public ResponseEntity<Void> lookupUrl(@PathVariable Long id) {
+    public ResponseEntity<Void> lookupUrl(@PathVariable String id) {
         String longUrl = urlsRepository.selectUrl(id);
         if (longUrl == null) {
             return ResponseEntity.notFound().build();

@@ -1,5 +1,6 @@
 spring:
   application:
+
     name: tiny-url-gateway
   cloud:
     consul:
@@ -17,6 +18,7 @@ spring:
           uri: lb://tiny-url-backend
           predicates:
             - Path=/short-url/**, /url/**
+
           metadata:
             response-timeout: 500
           filters:
